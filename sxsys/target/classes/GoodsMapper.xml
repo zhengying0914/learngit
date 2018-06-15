@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+<mapper namespace="GoodsMapper">
+	<select id="selectAll" resultType="com.sxsys.entity.Goods">
+	SELECT * FROM goods order by id desc
+	</select>
+	
+	<insert id="inserGoods" parmeterType="com.sxsys.entity.Goods">
+	INSERT INTO goods(goods_name,goods_price,goods_desc,typeid)
+	 VALUES (#{goods_name},#{goods_price},#{goods_desc},#{goodstype.id})
+	</insert>
+	
+</mapper>
