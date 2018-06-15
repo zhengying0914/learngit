@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GoodsMapper">
+  <select id="selectAll" resultType="com.zy.entity.Goods">
+    SELECT * FROM goods
+  </select>
+  <select id="selectById" parameterType="int" resultType="com.zy.entity.Goods">
+    SELECT * FROM goods where id=#{id}
+  </select>
+  <insert id="insertGoods" parameterType="com.zy.entity.Goods">
+    insert into goods(id,goods_name,goods_type,goods_price,goods_number)
+    values(#{id},#{goods_name},#{goods_type},#{goods_price},#{goods_number})
+  </insert>
+  <update id="updateGoods" parameterType="com.zy.entity.Goods">
+   update goods set id=#{id},
+   goods_name=#{goods_name},
+   goods_type=#{goods_type},
+   goods_price=#{goods_price},
+   goods_number=#{goods_number}
+   where id=#{id}
+  </update>
+  <delete id="deleteGoods" parameterType="int">
+  delete from goods where id=#{id}
+  </delete>
+</mapper>

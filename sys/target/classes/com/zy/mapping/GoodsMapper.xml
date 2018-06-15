@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zy.dao.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.zy.entity.Goods" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="goods_type" property="goods_type" jdbcType="VARCHAR" />
+    <result column="goods_name" property="goods_name" jdbcType="VARCHAR" />
+    <result column="goods_price" property="goods_price" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, goods_type, goods_name, goods_price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zy.entity.Goods" >
+    insert into goods (id, goods_type, goods_name, 
+      goods_price)
+    values (#{id,jdbcType=INTEGER}, #{goods_type,jdbcType=VARCHAR}, #{goods_name,jdbcType=VARCHAR}, 
+      #{goods_price,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zy.entity.Goods" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id
+      </if>
+      <if test="goods_type != null" >
+        goods_type,
+      </if>
+      <if test="goods_name != null" >
+        goods_name,
+      </if>
+      <if test="goods_price != null" >
+        goods_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goods_type != null" >
+        #{goods_type,jdbcType=VARCHAR},
+      </if>
+      <if test="goods_name != null" >
+        #{goods_name,jdbcType=VARCHAR},
+      </if>
+      <if test="goods_price != null" >
+        #{goods_price,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zy.entity.Goods" >
+    update goods
+    <set >
+      <if test="goods_type != null" >
+        goods_type = #{goods_type,jdbcType=VARCHAR},
+      </if>
+      <if test="goods_name != null" >
+        goods_name = #{goods_name,jdbcType=VARCHAR},
+      </if>
+      <if test="goods_price != null" >
+        goods_price = #{goods_price,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zy.entity.Goods" >
+    update goods
+    set goods_type = #{goods_type,jdbcType=VARCHAR},
+      goods_name = #{goods_name,jdbcType=VARCHAR},
+      goods_price = #{goods_price,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
